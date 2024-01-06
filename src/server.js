@@ -20,7 +20,7 @@ class Server {
     }
 
     onListen() {
-        console.log(`${c.cyan('RTUSchedule Server')} ${c.green(`is running on port ${this.port}`)}`);
+        global.log(`${c.cyan('RTUSchedule Server')} ${c.green(`is running on port ${this.port}`)}`);
     }
 }
 
