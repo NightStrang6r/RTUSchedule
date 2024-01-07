@@ -4,17 +4,6 @@ const URL = require('./URL.js');
 class API {
     constructor() {
         this.URL = new URL();
-        this.test();
-    }
-
-    async test(){
-        //global.log((await this.getChousenSemesterById(26)));
-        //global.log((await this.findProgramsBySemesterId(10)));
-        //global.log((await this.findCourseByProgramId(20, 333)));
-        //global.log((await this.findGroupByCourseId(18, 333, 1)));
-        //global.log((await this.isSemesterProgramPublished(11051)));
-        //global.log((await this.getSemProgSubjects(61030)));
-        //global.log((await this.getSemesterProgEventList(6103, 2023, 6)));
     }
 
     async POSTRequest(url, body = null) {

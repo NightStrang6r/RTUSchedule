@@ -1,15 +1,26 @@
 const express = require('express');
 const API = require('./API.js');
+const Locale = require('./locale.js');
+
 
 class Router {
     constructor() {
         this.API = new API();
+        this.locale = new Locale(global.storage.indexesPath, 'uk');
     }
 
     async onIndex(req, res) {
+        let lang = 'uk';
+
+        if(req.cookies && req.cookies.lang) {
+            lang = req.cookies.lang;
+        } else {
+            res.cookie('lang', lang);
+        }
+
+        let index = await this.locale.getIndex(lang);
         res.setHeader('content-type', 'text/html');
-        res.send("<h1>RTUSchedule Server</h1>");
-        await this.API.test();
+        res.send(index);
     }
 
     static() {
