@@ -10,34 +10,18 @@
         <meta name="og:description" content="${description}" />
         <meta name="og:type" content="website" />
         <!-- <meta name="og:url" content="https://rtu.date" /> -->
-        <!-- <meta name="og:image" content="https://rtu.date/assets/logo.png" /> -->
+        <meta name="og:image" content="assets/logo.png" />
         
-        <!-- <link rel='shortcut icon' href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📅</text></svg>" /> -->
-        <link href='lib/calendar.min.css' rel='stylesheet' />
-        <link href='css/material.css' rel='stylesheet' />
+        <link rel='shortcut icon' href="assets/shortcut_icon.png" />
         <link href='css/style.css' rel='stylesheet' />
 
         <script src='lib/calendar.min.js'></script>
+        <script src='js/dev/index.js' type="module"></script>
     </head>
     <body>
         <!-- Calendar -->
         <div id="calendar-container">
             <div id="calendar"></div>
-            <!--<div class="d-none">
-                <div id="timetable-unavailable">${timetableUnavailable}</div>
-                <div id="l-lang">${lang}</div>
-                <div id="l-today">${today}</div>
-                <div id="l-month">${month}</div>
-                <div id="l-week">${week}</div>
-                <div id="l-day">${day}</div>
-                <div id="l-type">${type}</div>
-                <div id="l-audience">${audienceUpper}</div>
-                <div id="l-teachers">${teachers}</div>
-                <div id="l-groups">${groups}</div>
-                <div id="l-dayUpper">${dayUpper}</div>
-                <div id="l-time">${timeUpper}</div>
-                <div id="l-toDelete">${toDeleteEvent}</div>
-            </div> -->
         </div>
         <!-- /Calendar -->
     </body>

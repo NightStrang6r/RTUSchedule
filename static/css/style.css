@@ -1,2 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 
+html, body {
+    overflow: hidden; /* don't do scrollbars */
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+    margin: 0;
+}
