@@ -15,12 +15,12 @@ class App {
         
         // Burger Menu Start
         const burgerButton = document.querySelector(".header__burger-menu");
-        const header__nav = document.querySelector(".header__nav");
+        const header_container = document.querySelector(".header-container");
         const body = document.querySelector("body");
         const navLinks = document.querySelectorAll(".header__menu-link");
 
         burgerButton.addEventListener("click", function() {
-            header__nav.classList.toggle("active");
+            header_container.classList.toggle("active");
             burgerButton.classList.toggle("active");
             body.classList.toggle("lock");
         });
