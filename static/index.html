@@ -19,6 +19,43 @@
         <script src='js/dev/index.js' type="module"></script>
     </head>
     <body>
+        <header>
+            <div class="header-container">
+                <div class="header__top">
+                    <div class="header__logo-container">
+                        <a href="/" class="header__logo-link">
+                            <img class="header__logo-img" src="assets/logo.png" alt="RTU logo">
+                        </a>
+                    </div>
+                    <button class="header__burger-menu mobile" type="button">
+                        <span class="header__burger-line"></span>
+                    </button>
+                </div>
+                <nav class="header__nav">
+                    <ul class="header__menu">
+                        <li class="header__menu-item mobile">
+                            <a href="#about-us" class="header__menu-link">Mobile</a>
+                        </li>
+                        <li class="header__menu-item desktop">
+                            <a href="#shop-now" class="header__menu-link">Desktop</a>
+                        </li>
+                        <li class="header__menu-item mobile">
+                            <a href="#top-picks" class="header__menu-link">Mobile</a>
+                        </li>
+                        <li class="header__menu-item desktop">
+                            <a href="#app" class="header__menu-link">Desktop</a>
+                        </li>
+                        <li class="header__menu-item mobile">
+                            <a href="#contacts" class="header__menu-link">Mobile</a>
+                        </li>
+                    </ul>
+                </nav>
+                <button class="header__burger-menu desktop" type="button">
+                    <span class="header__burger-line"></span>
+                </button>
+            </div>
+        </header>
+
         <!-- Calendar -->
         <div id="calendar-container">
             <div id="calendar"></div>
