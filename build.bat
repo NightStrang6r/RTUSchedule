@@ -1,0 +1,1 @@
+call esbuild ./static/js/dev/index.js --bundle --outfile=./static/js/index.js --charset=utf8

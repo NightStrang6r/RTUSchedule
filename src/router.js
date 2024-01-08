@@ -2,7 +2,6 @@ const express = require('express');
 const API = require('./API.js');
 const Locale = require('./locale.js');
 
-
 class Router {
     constructor() {
         this.API = new API();

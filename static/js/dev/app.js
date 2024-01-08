@@ -11,25 +11,30 @@ class App {
     }
 
     async main() {
-
-        
         // Burger Menu Start
-        const burgerButton = document.querySelector(".header__burger-menu");
+        const burgerButtonMobile = document.querySelector(".header__burger-menu.mobile");
+        const burgerButtonDesktop = document.querySelector(".header__burger-menu.desktop");
         const header_container = document.querySelector(".header-container");
         const body = document.querySelector("body");
         const navLinks = document.querySelectorAll(".header__menu-link");
+        const openSidebarMenu =  document.getElementById("openSidebarMenu");
 
-        burgerButton.addEventListener("click", function() {
+        burgerButtonDesktop.addEventListener("click", () => {
+            burgerButtonDesktop.classList.toggle("active");
+            openSidebarMenu.checked = !openSidebarMenu.checked;
+        });
+
+        burgerButtonMobile.addEventListener("click", function() {
             header_container.classList.toggle("active");
-            burgerButton.classList.toggle("active");
+            burgerButtonMobile.classList.toggle("active");
             body.classList.toggle("lock");
         });
 
         navLinks.forEach((navLink) => {
             navLink.addEventListener("click", () => {
-                if (burgerButton.classList.contains("active")) {
+                if (burgerButtonMobile.classList.contains("active")) {
                     header__nav.classList.remove("active");
-                    burgerButton.classList.remove("active");
+                    burgerButtonMobile.classList.remove("active");
                     body.classList.remove("lock");
                 }
             });

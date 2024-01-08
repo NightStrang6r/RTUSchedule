@@ -16,12 +16,15 @@
         <link href='css/style.css' rel='stylesheet' />
 
         <script src='lib/calendar.min.js'></script>
-        <script src='js/dev/index.js' type="module"></script>
+        <script src='js/index.js' type="module"></script>
     </head>
     <body>
         <header>
-            <div class="header-container">
+            <div class="header-container">                
                 <div class="header__top">
+                    <button class="header__burger-menu desktop">
+                        <span class="header__burger-line"></span>
+                    </button>
                     <div class="header__logo-container">
                         <a href="/" class="header__logo-link">
                             <img class="header__logo-img" src="assets/logo.png" alt="RTU logo">
@@ -31,32 +34,52 @@
                         <span class="header__burger-line"></span>
                     </button>
                 </div>
+                
                 <nav class="header__nav">
                     <ul class="header__menu">
-                        <li class="header__menu-item mobile">
-                            <a href="#about-us" class="header__menu-link">Mobile</a>
+                        <li>
+                            <div class="menu-item">
+                                <img class="menu-item-img" src="assets/logo.png" />
+                                <p class="mobile">Filter</p>
+                                <!-- Filter -->
+                            </div>
                         </li>
-                        <li class="header__menu-item desktop">
-                            <a href="#shop-now" class="header__menu-link">Desktop</a>
+                        <li>
+                            <div class="menu-item">
+                                <img class="menu-item-img" src="assets/logo.png" />
+                                <p class="mobile">Update</p>
+                                <!-- Update -->
+                            </div>
                         </li>
-                        <li class="header__menu-item mobile">
-                            <a href="#top-picks" class="header__menu-link">Mobile</a>
-                        </li>
-                        <li class="header__menu-item desktop">
-                            <a href="#app" class="header__menu-link">Desktop</a>
-                        </li>
-                        <li class="header__menu-item mobile">
-                            <a href="#contacts" class="header__menu-link">Mobile</a>
+                        <li>
+                            <div class="menu-item">
+                                <img class="menu-item-img" src="assets/logo.png" />
+                                <p class="mobile">Theme</p>
+                                <!-- Theme -->
+                            </div>
                         </li>
                     </ul>
                 </nav>
-                <div class="header__burger-desktop">
-                    <button class="header__burger-menu desktop" type="button">
-                        <span class="header__burger-line"></span>
-                    </button>
-                </div>
             </div>
         </header>
+
+        <!-- Sidebar -->
+        <div class="desktop">
+            <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+            
+            <div id="sidebarMenu">
+                <ul class="sidebarMenuInner">
+                    <li class="cd-popup-language-trigger"><a href="#">Extended</a></li>
+                    <li class="clear-button"><a href="#">Extended</a></li>
+                    <li class="logout-button"><a href="#">Extended</a></li>
+                </ul>
+                <div class="d-none">
+                    <div id="l-toClearCache">${toClearCache}</div>
+                </div>
+            </div>
+        </div>
+        <!-- /Sidebar -->
+
 
         <!-- Calendar -->
         <div id="calendar-container">

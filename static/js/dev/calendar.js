@@ -12,9 +12,6 @@ class Calendar {
             allDayText: '',
             initialView: 'timeGridWeek',
             locale: 'en',
-            selectable: true,
-            dayMaxEvents: true,
-            selectMirror: true,
             firstDay: 1,
             height: '100%',
             nowIndicator: true,
@@ -26,8 +23,7 @@ class Calendar {
                 minute: '2-digit',
                 omitZeroMinute: false,
                 meridiem: 'short'
-            },
-            unselectCancel: '.cd-popup-container'
+            }
         }
     
         this.calendar = new FullCalendar.Calendar(this.calendarEl, options);
