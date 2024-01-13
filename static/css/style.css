@@ -187,6 +187,17 @@ html, body {
     height: 28px;
 }
 
+/* Fc-buttons size for mobile */
+@media (max-width: 992px) {
+    .fc .fc-button {
+        padding: 0.4em 0.9em
+    }
+}
+
+.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+    padding: 0 21px;
+}
+
 /* SideBar START*/
 #sidebarMenu {
     z-index: 2;
@@ -284,4 +295,3 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 }
 /* SideBar END*/
 /* HEADER END */
-
