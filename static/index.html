@@ -13,54 +13,61 @@
         <meta name="og:image" content="assets/logo.png" />
         
         <link rel='shortcut icon' href="assets/shortcut_icon.png" />
+        <link href='lib/calendar.min.css' rel='stylesheet' />
+        <link href='css/material.css' rel='stylesheet' />
         <link href='css/style.css' rel='stylesheet' />
 
         <script src='lib/calendar.min.js'></script>
+        <script src='lib/swipeCalendar.js'></script>
         <script src='js/index.js' type="module"></script>
     </head>
     <body>
+        <!-- Header -->
         <header>
             <div class="header-container">                
                 <div class="header__top">
                     <button class="header__burger-menu desktop">
                         <span class="header__burger-line"></span>
                     </button>
-                    <div class="header__logo-container">
-                        <a href="/" class="header__logo-link">
-                            <img class="header__logo-img" src="assets/logo.png" alt="RTU logo">
-                        </a>
+                    <div class="header__logo-container" onclick="window.location.reload()">
+                        <img class="header__logo-img" src="assets/logo.png" />
+                        <div class="logo-text desktop">RTU Schedule</div>
                     </div>
                     <button class="header__burger-menu mobile" type="button">
                         <span class="header__burger-line"></span>
                     </button>
                 </div>
+                <div class="desktop course-name menu-item">
+                    <p class="course-name">Course name</p>
+                </div>                    
                 <nav class="header__nav">
                     <ul class="header__menu">
                         <li>
+                            <div class="menu-item dark-trigger">
+                                <img class="menu-item-img" src="assets/moon.png" />
+                                <p class="mobile">Theme</p>
+                                <!-- Theme -->
+                            </div>
+                        </li>
+                        <li>
                             <div class="menu-item">
-                                <img class="menu-item-img" src="assets/logo.png" />
+                                <img class="menu-item-img" src="assets/filter.png" />
                                 <p class="mobile">Filter</p>
                                 <!-- Filter -->
                             </div>
                         </li>
                         <li>
                             <div class="menu-item">
-                                <img class="menu-item-img" src="assets/logo.png" />
+                                <img class="menu-item-img" src="assets/refresh.png" />
                                 <p class="mobile">Update</p>
                                 <!-- Update -->
-                            </div>
-                        </li>
-                        <li>
-                            <div class="menu-item">
-                                <img class="menu-item-img" src="assets/logo.png" />
-                                <p class="mobile">Theme</p>
-                                <!-- Theme -->
                             </div>
                         </li>
                     </ul>
                 </nav>
             </div>
         </header>
+        <!-- /Header -->
 
         <!-- Sidebar -->
         <div class="desktop">
@@ -81,8 +88,10 @@
 
 
         <!-- Calendar -->
-        <div id="calendar-container">
-            <div id="calendar"></div>
+        <div class="calendar-container">
+            <div class="calendar-block">
+                <div id="calendar"></div>
+            </div>
         </div>
         <!-- /Calendar -->
     </body>

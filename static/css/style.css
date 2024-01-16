@@ -10,8 +10,10 @@ html, body {
 /* HEADER START */
 .header-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 0 20px;
+    align-items: center;
+
 }
 
 .header-container.active {
@@ -19,7 +21,7 @@ html, body {
     width: 100%;
     height: 100%;
     background-color: white;
-    z-index: 2;
+    z-index: 5;
 }
 
 .header-wrapper{
@@ -43,6 +45,7 @@ html, body {
 
 .header__nav {
     justify-content: center;
+    align-items: center;
     display: none;
     padding: 10px;
 }
@@ -51,10 +54,35 @@ html, body {
     display: flex;
 }
 
+.header__logo-container{
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header-info{
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.course-name{
+    font-size: 22px;
+}
+
+.course-name.menu-item.desktop{
+    display: none;
+}
 
 .header__logo-img {
     width: 40px;
     height: auto;
+}
+
+.logo-text {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 22px;
 }
 
 .header__menu {
@@ -143,7 +171,7 @@ html, body {
     display: none;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 990px) {
     .mobile {
         display: none;
     }
@@ -158,6 +186,10 @@ html, body {
         align-items: center;
     }
 
+    .course-name.menu-item.desktop{
+        display: block;
+    }
+
     .header__nav {
         display: flex;
     }
@@ -168,7 +200,6 @@ html, body {
 }
 
 .menu-item {
-    display: inline-flex;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -179,6 +210,12 @@ html, body {
     cursor: pointer;
 }
 
+.course-name.menu-item{
+    height: 40px;
+    padding: 0;
+    margin-left: 0;
+}
+
 .menu-item:hover {
     background-color: #e2e2e2;
 }
@@ -186,17 +223,6 @@ html, body {
 .menu-item-img {
     width: 28px;
     height: 28px;
-}
-
-/* Fc-buttons size for mobile */
-@media (max-width: 992px) {
-    .fc .fc-button {
-        padding: 0.4em 0.9em
-    }
-}
-
-.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
-    padding: 0 21px;
 }
 
 /* SideBar START*/
@@ -296,3 +322,37 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 }
 /* SideBar END*/
 /* HEADER END */
+
+/* CALENDAR CONTAINER START */
+.calendar-block {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Fc-buttons size for mobile */
+@media (max-width: 990px) {
+    .fc .fc-button {
+        padding: 0.4em 0.9em;
+        min-width: 10px;
+    }
+
+    /*.swc-toolbar .fc-toolbar-title {
+        display: none;
+    }
+
+    .fc-prev-button, .fc-next-button {
+        display: none !important;
+    }
+
+    .fc-today-button {
+        margin-left: 0 !important;
+    }*/
+}
+
+.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+    padding: 0 21px;
+}
+/* CALENDAR CONTAINER END */
