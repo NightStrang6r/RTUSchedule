@@ -132,6 +132,38 @@
   };
   var darkTheme_default = DarkTheme;
 
+  // static/js/dev/API.js
+  var API = class {
+    constructor() {
+      this.getSemesterProgEventList("13741", "2024", "01");
+    }
+    async getSemesterProgEventList(semesterProgramId, year, month) {
+      const url = `/getSemesterProgEventList`;
+      const body = {
+        semesterProgramId,
+        year,
+        month
+      };
+      const data = new URLSearchParams(body);
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+        },
+        body: data
+      };
+      let res, json;
+      try {
+        res = await fetch(url, options);
+        json = await res.json();
+      } catch (err) {
+        json = false;
+      }
+      return json;
+    }
+  };
+  var API_default = API;
+
   // static/js/dev/app.js
   var App = class {
     constructor() {
@@ -139,6 +171,7 @@
       this.burger = new burger_default();
       this.darkTheme = new darkTheme_default();
       this.calendar = new calendar_default("#calendar");
+      this.API = new API_default();
     }
     run() {
       this.burger.init();

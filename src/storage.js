@@ -1,6 +1,7 @@
-const path = require('path');
-const fs = require('fs');
-const fsa = require('fs').promises;
+import path from 'path';
+import fs from 'fs';
+
+const fsa = fs.promises;
 
 class Storage {
     constructor() {
@@ -52,4 +53,4 @@ class Storage {
     }
 }
 
-module.exports = Storage;
+export default Storage;

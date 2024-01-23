@@ -1,6 +1,6 @@
-const express = require('express');
-const API = require('./API.js');
-const Locale = require('./locale.js');
+import express from 'express';
+import API from './API.js';
+import Locale from './locale.js';
 
 class Router {
     constructor() {
@@ -9,7 +9,7 @@ class Router {
     }
 
     async onIndex(req, res) {
-        let lang = 'uk';
+        let lang = 'en';
 
         if(req.cookies && req.cookies.lang) {
             lang = req.cookies.lang;
@@ -25,6 +25,27 @@ class Router {
     static() {
         return express.static(global.storage.staticPath);
     }
+
+    async getSemesterProgEventList(req, res) {
+        try {
+            if (!req.body || !req.body.semesterProgramId || !req.body.year || !req.body.month) {
+                res.status(400).send('Bad request');
+                return;
+            }
+    
+            const eventList = await this.API.getSemesterProgEventList(req.body.semesterProgramId, req.body.year, req.body.month);
+
+            if(!eventList) {
+                res.status(500).send('Internal server error');
+                return;
+            }
+
+            res.status(200).send(eventList);
+        } catch (e) {
+            global.log(`Error while getSemesterProgEventList: ${e}`, 'r');
+            return null;
+        }
+    }
 }
 
-module.exports = Router;
+export default Router;

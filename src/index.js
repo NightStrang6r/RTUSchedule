@@ -1,6 +1,6 @@
-const Logger = require('./logger.js');
-const Storage = require('./storage.js');
-const Server = require('./server.js');
+import Logger from './logger.js';
+import Storage from './storage.js';
+import Server from './server.js';
 
 process.on('unhandledRejection', (error) => {
     console.log('Unhandled Rejection at: ', error);

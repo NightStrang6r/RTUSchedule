@@ -1,6 +1,7 @@
-const express = require('express');
-const Router = require('./router.js');
-const c = require('chalk');
+import express from 'express';
+import Router from './router.js';
+import bodyParser from 'body-parser';
+import c from 'chalk';
 
 class Server {
     constructor(port) {
@@ -11,8 +12,11 @@ class Server {
     run() {
         const router = new Router();
 
+        this.server.use(bodyParser.urlencoded({ extended: false }));
+
         this.server.get('/',             (req, res) => router.onIndex(req, res));
         this.server.get('/index.html',   (req, res) => router.onIndex(req, res));
+        this.server.post('/getSemesterProgEventList', (req, res) => router.getSemesterProgEventList(req, res));
 
         this.server.use(router.static());
         
@@ -24,4 +28,4 @@ class Server {
     }
 }
 
-module.exports = Server;
+export default Server;

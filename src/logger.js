@@ -1,4 +1,4 @@
-const c = require('chalk');
+import c from 'chalk';
 
 const logo = `
 ██████╗ ████████╗██╗   ██╗███████╗ ██████╗██╗  ██╗███████╗██████╗ ██╗   ██╗██╗     ███████╗
@@ -74,4 +74,4 @@ function getDate() {
     }
 }
 
-module.exports = Logger;
+export default Logger;

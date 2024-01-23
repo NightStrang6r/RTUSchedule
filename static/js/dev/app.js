@@ -1,6 +1,7 @@
 import Calendar from "./calendar.js";
 import Burger from "./burger.js";
 import DarkTheme from "./darkTheme.js";
+import API from "./API.js";
 
 class App {
     constructor() {
@@ -8,6 +9,7 @@ class App {
         this.burger = new Burger();
         this.darkTheme = new DarkTheme();
         this.calendar = new Calendar("#calendar");
+        this.API = new API();
     }
 
     run() {

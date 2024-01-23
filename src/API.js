@@ -1,5 +1,5 @@
-const fetch = require('node-fetch');
-const URL = require('./URL.js');
+import fetch from 'node-fetch';
+import URL from'./URL.js';
 
 class API {
     constructor() {
@@ -148,4 +148,4 @@ class API {
     }
 }
 
-module.exports = API;
+export default API;

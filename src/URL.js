@@ -32,4 +32,4 @@ class URL {
     }
 }
 
-module.exports = URL;
+export default URL;

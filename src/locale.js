@@ -41,4 +41,4 @@ class Localization {
     }
 }
 
-module.exports = Localization;
+export default Localization;
