@@ -1,8 +1,18 @@
+import EventManager from "./eventManager.js";
+
 class Calendar {
     constructor(selector) {
         this.calendarEl = document.querySelector(selector);
 
         this.options = {
+            customButtons: {
+                chooseScheduleButton: {
+                    text: 'Choose schedule',
+                    click: function() {
+                        alert('clicked the custom button!');
+                    }
+                }
+            },
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
@@ -33,15 +43,28 @@ class Calendar {
         if (window.innerWidth < 990) {
             this.options.swipeTitlePosition = 'center';
             this.options.headerToolbar = {
-                right: 'dayGridMonth,timeGridWeek,timeGridDay,today'
+                left: 'dayGridMonth,timeGridWeek,timeGridDay,today',
+                right: 'chooseScheduleButton'
             }
         }
     
         this.calendar = new SwipeCalendar(this.calendarEl, this.options);
+        this.eventManager = new EventManager();
     }
 
     render() {
         this.calendar.render();
+    }
+
+    loadEvents(events) {
+        events.forEach(async (event) => {
+            this.addEvent(event);
+        });
+    }
+
+    async addEvent(event) {
+        let eventObject = this.eventManager.parseEvent(event);
+        this.calendar.addEvent(eventObject);
     }
 
     onWindowResize(arg) {

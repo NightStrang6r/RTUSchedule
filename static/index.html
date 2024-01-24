@@ -11,6 +11,8 @@
         <meta name="og:type" content="website" />
         <!-- <meta name="og:url" content="https://rtu.date" /> -->
         <meta name="og:image" content="assets/logo.png" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <link rel='shortcut icon' href="assets/shortcut_icon.png" />
         <link href='lib/calendar.min.css' rel='stylesheet' />
@@ -26,20 +28,22 @@
         <header>
             <div class="header-container">                
                 <div class="header__top">
-                    <button class="header__burger-menu desktop">
-                        <span class="header__burger-line"></span>
-                    </button>
+                    <div class="header__burger-menu-container">
+                        <button class="header__burger-menu desktop">
+                            <span class="header__burger-line"></span>
+                        </button>
+                    </div>
                     <div class="header__logo-container" onclick="window.location.reload()">
                         <img class="header__logo-img" src="assets/logo.png" />
-                        <div class="logo-text desktop">RTU Schedule</div>
+                        <div class="logo-text">RTU Schedule</div>
                     </div>
                     <button class="header__burger-menu mobile" type="button">
                         <span class="header__burger-line"></span>
                     </button>
                 </div>
-                <div class="desktop course-name menu-item">
+                <div class="desktop course-name menu-item centered">
                     <p class="course-name">Course name</p>
-                </div>                    
+                </div>
                 <nav class="header__nav">
                     <ul class="header__menu">
                         <li>
@@ -86,7 +90,6 @@
         </div>
         <!-- /Sidebar -->
 
-
         <!-- Calendar -->
         <div class="calendar-container">
             <div class="calendar-block">
@@ -94,5 +97,30 @@
             </div>
         </div>
         <!-- /Calendar -->
+
+        <!-- Popup-Select-Schedule -->
+        <div class="cd-popup cd-popup-select-schedule d-none" role="alert">
+            <div class="cd-popup-container">
+                <p>Select schedule</p>
+                <ul class="tab-header unselectable">
+                    <li class="tab-header-item active" data-tab="groups">
+                        Full-time
+                    </li>
+                    <li class="tab-header-item" data-tab="teachers">
+                        Erasmus
+                    </li>
+                </ul>
+                <div class="popup-input">
+                    <input type="text" class="form-control input-search" placeholder="${search}"/>
+                </div>
+                <div class="popup-list unselectable">
+                </div>
+                <div class="popup-down">
+                    <button class="button save-button popup-add-save">${save}</button>
+                </div>
+                <a class="cd-popup-close img-replace"></a>
+            </div>
+        </div>
+        <!-- /Popup-Select-Schedule -->
     </body>
 </html>

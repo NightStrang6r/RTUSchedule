@@ -10,10 +10,9 @@ html, body {
 /* HEADER START */
 .header-container {
     display: flex;
-    flex-direction: row;
-    padding: 0 20px;
+    flex-direction: column;
     align-items: center;
-
+    /* padding: 0 20px; */
 }
 
 .header-container.active {
@@ -24,12 +23,18 @@ html, body {
     z-index: 5;
 }
 
+.header__burger-menu-container{
+    width: 30px;
+    display: none;
+}
+
 .header-wrapper{
     padding: 10px;
 }
 
 
 .header__top {
+    width: 90%;
     display: flex;
     justify-content: space-between;
     gap: 16px;
@@ -142,10 +147,16 @@ html, body {
     bottom: 90%;
 }
 
-.header__burger-menu.active {
+.header__burger-menu.active.desktop {
     width: 40px;
     margin: 0 30px 0 -7px;
     padding-right: 8px;
+}
+
+.header__burger-menu.active.mobile {
+    width: 40px;
+    margin: 0 -7px 0 30px;
+    padding-left: 8px;
 }
 
 .header__burger-menu.active .header__burger-line {
@@ -171,6 +182,13 @@ html, body {
     display: none;
 }
 
+.centered {
+    position: fixed;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%);
+}
+
 @media (min-width: 990px) {
     .mobile {
         display: none;
@@ -179,15 +197,25 @@ html, body {
     .desktop {
         display: block;
     }
+
+    .header__top{
+        width: auto;
+    }
  
+    .header__burger-menu-container{
+        display: block;
+    }
+
     .header-container {
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
+        padding-left: 20px;
     }
 
     .course-name.menu-item.desktop{
-        display: block;
+        display: flex;
+        padding: 3px;
+        align-items: center;
     }
 
     .header__nav {
@@ -335,7 +363,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 /* Fc-buttons size for mobile */
 @media (max-width: 990px) {
     .fc .fc-button {
-        padding: 0.4em 0.9em;
+        padding: 0.4em 0.6em;
         min-width: 10px;
     }
 
@@ -356,3 +384,207 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
     padding: 0 21px;
 }
 /* CALENDAR CONTAINER END */
+
+/* POPUP START */
+.cd-popup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(94, 110, 141, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+    -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+    transition: opacity 0.3s 0s, visibility 0s 0.3s;
+}
+.cd-popup.is-visible {
+    z-index: 3;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
+    -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
+    transition: opacity 0.3s 0s, visibility 0s 0s;
+}
+  
+.cd-popup-container {
+    position: relative;
+    width: 50%;
+    height: auto;
+    padding-bottom: 1px;
+    max-width: 600px;
+    margin: 4em auto;
+    background: #FFF;
+    border-radius: .25em .25em .4em .4em;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    -webkit-transform: translateY(-40px);
+    -moz-transform: translateY(-40px);
+    -ms-transform: translateY(-40px);
+    -o-transform: translateY(-40px);
+    transform: translateY(-40px);
+    /* Force Hardware Acceleration in WebKit */
+    /*-webkit-backface-visibility: hidden;*/
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+.cd-popup-container p {
+    padding-top: 1em;
+    padding-right: 1em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    font-size: 20px;
+}
+.cd-buttons {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+.cd-popup-container .cd-buttons:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.cd-popup-container .cd-buttons li {
+    float: left;
+    width: 50%;
+    list-style: none;
+}
+.cd-popup-container .cd-buttons a {
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    text-transform: uppercase;
+    color: #FFF;
+    -webkit-transition: background-color 0.2s;
+    -moz-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+}
+.cd-popup-container .cd-buttons li:first-child a {
+    background: #fc7169;
+    border-radius: 0 0 0 .25em;
+}
+.no-touch .cd-popup-container .cd-buttons li:first-child a:hover {
+    background-color: #fc8982;
+}
+.cd-popup-container .cd-buttons li:last-child a {
+    background: #b6bece;
+    border-radius: 0 0 .25em 0;
+}
+.no-touch .cd-popup-container .cd-buttons li:last-child a:hover {
+    background-color: #c5ccd8;
+}
+.cd-popup-container .cd-popup-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.cd-popup-container .cd-popup-close::before, .cd-popup-container .cd-popup-close::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    width: 14px;
+    height: 3px;
+    background-color: #8f9cb5;
+}
+.cd-popup-container .cd-popup-close::before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    left: 8px;
+}
+.cd-popup-container .cd-popup-close::after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    right: 8px;
+}
+.is-visible .cd-popup-container {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+}
+@media only screen and (min-width: 1170px) {
+    .cd-popup-container {
+      margin: 8em auto;
+    }
+}
+
+.d-none {
+    display: none !important;
+}
+/* POPUP END */
+
+/* TABS START */
+/* TABS */
+
+.tabs {
+    width: 100%;
+    max-width: 500px;
+}
+ 
+ /* Стили для списка вкладок */
+.tab-header {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+ 
+ /* Стили для вкладки */
+.tab-header-item {
+    padding: 10px 20px;
+    margin-right: 5px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+ 
+ /* Стили для активной вкладки */
+.tab-header-item.active {
+    color: red;
+    position: relative;
+    background-color: #fff;
+    border-color: red;
+}
+ 
+/* Стиль для списка контейнеров с содержимым вкладок */
+.tab-content {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+ }
+ 
+/* Стили для контейнера с содержимым вкладки */
+.tab-content__item {
+    display: none;
+    padding: 20px;
+    border: 1px solid red;
+}
+ 
+/* Стили для активного контейнера вкладки */
+.tab-content__item.active {
+    display: block;
+}
+/* TABS END /*

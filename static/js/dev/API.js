@@ -1,8 +1,4 @@
 class API {
-    constructor() {
-        this.getSemesterProgEventList('13741', '2024', '01');
-    }
-
     async getSemesterProgEventList(semesterProgramId, year, month) {
         const url = `/getSemesterProgEventList`;
 
