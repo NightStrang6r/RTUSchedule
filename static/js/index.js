@@ -65,11 +65,6 @@
             }
           }
         },
-        headerToolbar: {
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay"
-        },
         height: "100%",
         allDaySlot: false,
         expandRows: true,
@@ -87,22 +82,44 @@
           meridiem: "short"
         },
         swipeEffect: "slide",
-        swipeSpeed: 250,
-        swipeTitlePosition: "none",
-        windowResize: (arg) => this.onWindowResize(arg)
+        swipeSpeed: 250
       };
-      if (window.innerWidth < 990) {
-        this.options.swipeTitlePosition = "center";
-        this.options.headerToolbar = {
+      this.desktopCalendarOptions = {
+        headerToolbar: {
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay"
+        },
+        swipeTitlePosition: "none"
+      };
+      this.mobileCalendarOptions = {
+        headerToolbar: {
           left: "dayGridMonth,timeGridWeek,timeGridDay,today",
           right: "chooseScheduleButton"
-        };
-      }
-      this.calendar = new SwipeCalendar(this.calendarEl, this.options);
+        },
+        swipeTitlePosition: "center"
+      };
+      this.mobileWidth = 990;
+      this.isMobileCalendar = false;
+      this.initOptions();
+      window.addEventListener("resize", (event) => this.onWindowResize(event));
+      this.init();
       this.eventManager = new eventManager_default();
+    }
+    init() {
+      this.calendar = new SwipeCalendar(this.calendarEl, this.options);
     }
     render() {
       this.calendar.render();
+    }
+    destroy() {
+      this.calendar = null;
+      this.calendarEl.innerHTML = "";
+    }
+    rerender() {
+      this.destroy();
+      this.init();
+      this.render();
     }
     loadEvents(events) {
       events.forEach(async (event) => {
@@ -113,7 +130,25 @@
       let eventObject = this.eventManager.parseEvent(event);
       this.calendar.addEvent(eventObject);
     }
-    onWindowResize(arg) {
+    initOptions() {
+      if (window.innerWidth < this.mobileWidth) {
+        this.options = { ...this.options, ...this.mobileCalendarOptions };
+      } else {
+        this.options = { ...this.options, ...this.desktopCalendarOptions };
+      }
+    }
+    onWindowResize(event) {
+      if (window.innerWidth < this.mobileWidth && !this.isMobileCalendar) {
+        this.isMobileCalendar = true;
+        this.initOptions();
+        this.rerender();
+        console.log("Switched to mobile calendar");
+      } else if (window.innerWidth >= this.mobileWidth && this.isMobileCalendar) {
+        this.isMobileCalendar = false;
+        this.initOptions();
+        this.rerender();
+        console.log("Switched to desktop calendar");
+      }
     }
   };
   var calendar_default = Calendar;
@@ -270,6 +305,25 @@
   var PopupSelectSchedule = class extends popup_default {
     constructor(popupSelector, triggerSelector) {
       super(popupSelector, triggerSelector);
+      this.tabFullTimeEl = document.querySelector(".js-tab-header-full-time");
+      this.tabErasmusEl = document.querySelector(".js-tab-header-erasmus");
+      this.inputFullTimeEl = document.querySelector(".js-popup-schedule-input-full-time");
+      this.inputErasmusEl = document.querySelector(".js-popup-schedule-input-erasmus");
+      this.tabFullTimeEl.addEventListener("click", (event) => this.onTabFullTimeSelected(event));
+      this.tabErasmusEl.addEventListener("click", (event) => this.onTabErasmusSelected(event));
+      var $select = $(".js-study-period-select").selectize();
+    }
+    onTabFullTimeSelected() {
+      this.tabFullTimeEl.classList.add("active");
+      this.tabErasmusEl.classList.remove("active");
+      this.inputFullTimeEl.classList.remove("d-none");
+      this.inputErasmusEl.classList.add("d-none");
+    }
+    onTabErasmusSelected() {
+      this.tabFullTimeEl.classList.remove("active");
+      this.tabErasmusEl.classList.add("active");
+      this.inputFullTimeEl.classList.add("d-none");
+      this.inputErasmusEl.classList.remove("d-none");
     }
   };
   var popupSelectSchedule_default = PopupSelectSchedule;
@@ -282,12 +336,12 @@
       this.darkTheme = new darkTheme_default();
       this.calendar = new calendar_default("#calendar");
       this.API = new API_default();
-      this.PopupSelectSchedule = new popupSelectSchedule_default(".cd-popup-select-schedule");
     }
     run() {
       this.burger.init();
     }
     async main() {
+      this.popupSelectSchedule = new popupSelectSchedule_default(".cd-popup-select-schedule", ".js-course-select");
       const eventList = await this.API.getSemesterProgEventList("13017", "2024", "02");
       this.calendar.loadEvents(eventList);
       console.log("Events loaded: ", eventList);

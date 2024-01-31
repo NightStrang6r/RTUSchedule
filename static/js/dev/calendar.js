@@ -13,11 +13,6 @@ class Calendar {
                     }
                 }
             },
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
             height: '100%',
             allDaySlot: false,
             expandRows: true,
@@ -35,25 +30,53 @@ class Calendar {
                 meridiem: 'short'
             },
             swipeEffect: 'slide',
-            swipeSpeed: 250,
-            swipeTitlePosition: 'none',
-            windowResize: (arg) => this.onWindowResize(arg)
+            swipeSpeed: 250
         };
 
-        if (window.innerWidth < 990) {
-            this.options.swipeTitlePosition = 'center';
-            this.options.headerToolbar = {
+        this.desktopCalendarOptions = {
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            swipeTitlePosition: 'none'
+        };
+
+        this.mobileCalendarOptions = {
+            headerToolbar: {
                 left: 'dayGridMonth,timeGridWeek,timeGridDay,today',
                 right: 'chooseScheduleButton'
-            }
+            },
+            swipeTitlePosition: 'center'
         }
+
+        this.mobileWidth = 990;
+        this.isMobileCalendar = false;
+
+        this.initOptions();
+        window.addEventListener('resize', (event) => this.onWindowResize(event));
     
-        this.calendar = new SwipeCalendar(this.calendarEl, this.options);
+        this.init();
         this.eventManager = new EventManager();
+    }
+
+    init() {
+        this.calendar = new SwipeCalendar(this.calendarEl, this.options);
     }
 
     render() {
         this.calendar.render();
+    }
+
+    destroy() {
+        this.calendar = null;
+        this.calendarEl.innerHTML = '';
+    }
+
+    rerender() {
+        this.destroy();
+        this.init();
+        this.render();
     }
 
     loadEvents(events) {
@@ -67,14 +90,26 @@ class Calendar {
         this.calendar.addEvent(eventObject);
     }
 
-    onWindowResize(arg) {
-        /*if (window.innerWidth < 990) {
-            this.options.swipeTitlePosition = 'center';
+    initOptions() {
+        if (window.innerWidth < this.mobileWidth) {
+            this.options = {...this.options, ...this.mobileCalendarOptions};
         } else {
-            this.options.swipeTitlePosition = 'none';
+            this.options = {...this.options, ...this.desktopCalendarOptions};
         }
+    }
 
-        this.render();*/
+    onWindowResize(event) {
+        if (window.innerWidth < this.mobileWidth && !this.isMobileCalendar) {
+            this.isMobileCalendar = true;
+            this.initOptions();
+            this.rerender();
+            console.log('Switched to mobile calendar');
+        } else if (window.innerWidth >= this.mobileWidth && this.isMobileCalendar) {
+            this.isMobileCalendar = false;
+            this.initOptions();
+            this.rerender();
+            console.log('Switched to desktop calendar');
+        }
     }
 }
 

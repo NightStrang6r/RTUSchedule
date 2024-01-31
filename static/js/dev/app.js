@@ -11,15 +11,14 @@ class App {
         this.darkTheme = new DarkTheme();
         this.calendar = new Calendar("#calendar");
         this.API = new API();
-        this.PopupSelectSchedule = new PopupSelectSchedule(".cd-popup-select-schedule");
     }
 
     run() {
         this.burger.init();
-        //this.PopupSelectSchedule.open();
     }
 
     async main() {
+        this.popupSelectSchedule = new PopupSelectSchedule(".cd-popup-select-schedule", ".js-course-select");
         const eventList = await this.API.getSemesterProgEventList('13017', '2024', '02');
         this.calendar.loadEvents(eventList);
         console.log('Events loaded: ', eventList);

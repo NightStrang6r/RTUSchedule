@@ -18,9 +18,12 @@
         <link href='lib/calendar.min.css' rel='stylesheet' />
         <link href='css/material.css' rel='stylesheet' />
         <link href='css/style.css' rel='stylesheet' />
+        <link href='lib/selectize.min.css' rel='stylesheet' />
 
+        <script src='lib/jquery-3.7.1.min.js'></script>
         <script src='lib/calendar.min.js'></script>
         <script src='lib/swipeCalendar.js'></script>
+        <script src='lib/selectize.min.js'></script>
         <script src='js/index.js' type="module"></script>
     </head>
     <body>
@@ -41,7 +44,7 @@
                         <span class="header__burger-line"></span>
                     </button>
                 </div>
-                <div class="desktop course-name menu-item centered">
+                <div class="desktop course-name menu-item centered js-course-select">
                     <p class="course-name">Course name</p>
                 </div>
                 <nav class="header__nav">
@@ -79,9 +82,9 @@
             
             <div id="sidebarMenu">
                 <ul class="sidebarMenuInner">
-                    <li class="cd-popup-language-trigger"><a href="#">Extended</a></li>
-                    <li class="clear-button"><a href="#">Extended</a></li>
-                    <li class="logout-button"><a href="#">Extended</a></li>
+                    <li class="cd-popup-language-trigger"><a href="#">Button 1</a></li>
+                    <li class="clear-button"><a href="#">Button 2</a></li>
+                    <li class="logout-button"><a href="#">Button 3</a></li>
                 </ul>
                 <!-- <div class="d-none">
                     <div id="l-toClearCache">${toClearCache}</div>
@@ -103,20 +106,29 @@
             <div class="cd-popup-container">
                 <p>Select schedule</p>
                 <ul class="tab-header unselectable">
-                    <li class="tab-header-item active" data-tab="groups">
+                    <li class="tab-header-item js-tab-header-full-time active">
                         Full-time
                     </li>
-                    <li class="tab-header-item" data-tab="teachers">
+                    <li class="tab-header-item js-tab-header-erasmus">
                         Erasmus
                     </li>
                 </ul>
-                <div class="popup-input">
-                    <input type="text" class="form-control input-search" placeholder="${search}"/>
-                </div>
-                <div class="popup-list unselectable">
+                <div class="input-section">
+                    <div class="input-full-time js-popup-schedule-input-full-time">
+                        <div class="control-group">
+                            <label for="select-state">Study period:</label>
+                            <select class="js-study-period-select" placeholder="Select study period...">
+                                <option value="AL">Alabama</option>
+                                <option value="AK">Alaska</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-erasmus js-popup-schedule-input-erasmus d-none">
+                        
+                    </div>
                 </div>
                 <div class="popup-down">
-                    <button class="button save-button popup-add-save">${save}</button>
+                    <!-- <button class="button save-button popup-add-save">${save}</button> -->
                 </div>
                 <a class="cd-popup-close img-replace"></a>
             </div>
