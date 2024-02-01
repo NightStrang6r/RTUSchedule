@@ -1,4 +1,26 @@
 class API {
+
+    async POSTRequest(url, body = null) {
+        if (body) {
+            body = new URLSearchParams(body);
+        }
+    
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            body: body 
+        };
+    
+        const res = await fetch(url, options);
+        return res;
+    }
+
+    async getJsonFromRes(res){
+        return (await res.json());
+    }
+
     async getSemesterProgEventList(semesterProgramId, year, month) {
         const url = `/getSemesterProgEventList`;
 
@@ -7,26 +29,30 @@ class API {
             year: year,
             month: month
         };
+        const res = await this.POSTRequest(url, body);
+        const json = await this.getJsonFromRes(res);
+        return json;
+    }
 
-        const data = new URLSearchParams(body);
+    async getChousenSemesterById(semesterId){
+        const url = `/getChousenSemesterById`;
 
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            },
-            body: data
+        const body = {
+            semesterId: semesterId,
         };
+        const res = await this.POSTRequest(url, body);
+        const json = await this.getJsonFromRes(res);
+        return json;
+    }
 
-        let res, json;
-    
-        try {
-            res = await fetch(url, options);
-            json = await res.json();
-        } catch (err) {
-            json = false;
-        }
-    
+    async findProgramsBySemesterId(semesterId){
+        const url = `/findProgramsBySemesterId`;
+
+        const body = {
+            semesterId: semesterId,
+        };
+        const res = await this.POSTRequest(url, body);
+        const json = await this.getJsonFromRes(res);
         return json;
     }
 }

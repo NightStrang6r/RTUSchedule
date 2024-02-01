@@ -17,6 +17,8 @@ class Server {
         this.server.get('/',             (req, res) => router.onIndex(req, res));
         this.server.get('/index.html',   (req, res) => router.onIndex(req, res));
         this.server.post('/getSemesterProgEventList', (req, res) => router.getSemesterProgEventList(req, res));
+        this.server.post('/getChousenSemesterById', (req, res) => router.getChousenSemesterById(req, res));
+        this.server.post('/findProgramsBySemesterId', (req, res) => router.findProgramsBySemesterId(req, res));
 
         this.server.use(router.static());
         

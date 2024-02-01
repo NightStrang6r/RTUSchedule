@@ -189,8 +189,28 @@ html, body {
     transform: translate(-50%);
 }
 
+.js-study-period-select{
+    width: 50%;
+}
+
+.control-group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tab-header-item{
+    width: 20%;
+}
+
 .input-section{
     padding: 10px;
+}
+
+.input-full-time{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 @media(max-width: 990px){
@@ -374,6 +394,10 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
     bottom: 0;
 }
 
+.select-schedule-title{
+    margin: 0;
+}
+
 /* Fc-buttons size for mobile */
 @media (max-width: 990px) {
     .fc .fc-button {
@@ -408,6 +432,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
     width: 100%;
     background-color: rgba(94, 110, 141, 0.9);
     opacity: 0;
+    display: flex;
+    align-items: center;
     visibility: hidden;
     -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
     -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;

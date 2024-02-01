@@ -46,6 +46,48 @@ class Router {
             return null;
         }
     }
+
+    async getChousenSemesterById(req, res){
+        try {
+            if (!req.body || !req.body.semesterId) {
+                res.status(400).send('Bad request');
+                return;
+            }
+    
+            const semeserInfo = await this.API.getChousenSemesterById(req.body.semesterId);
+
+            if(!semeserInfo) {
+                res.status(500).send('Internal server error');
+                return;
+            }
+
+            res.status(200).send(semeserInfo);
+        } catch (e) {
+            global.log(`Error while getChousenSemesterById: ${e}`, 'r');
+            return null;
+        }
+    }
+    
+    async findProgramsBySemesterId(req, res){
+        try {
+            if (!req.body || !req.body.semesterId) {
+                res.status(400).send('Bad request');
+                return;
+            }
+    
+            const programsList = await this.API.getChousenSemesterById(req.body.semesterId);
+
+            if(!programsList) {
+                res.status(500).send('Internal server error');
+                return;
+            }
+
+            res.status(200).send(programsList);
+        } catch (e) {
+            global.log(`Error while getChousenSemesterById: ${e}`, 'r');
+            return null;
+        }
+    }
 }
 
 export default Router;

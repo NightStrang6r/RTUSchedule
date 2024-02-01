@@ -104,7 +104,7 @@
         <!-- Popup-Select-Schedule -->
         <div class="cd-popup cd-popup-select-schedule d-none" role="alert">
             <div class="cd-popup-container">
-                <p>Select schedule</p>
+                <p class="select-schedule-title">Select schedule</p>
                 <ul class="tab-header unselectable">
                     <li class="tab-header-item js-tab-header-full-time active">
                         Full-time
@@ -116,10 +116,31 @@
                 <div class="input-section">
                     <div class="input-full-time js-popup-schedule-input-full-time">
                         <div class="control-group">
-                            <label for="select-state">Study period:</label>
-                            <select class="js-study-period-select" placeholder="Select study period...">
-                                <option value="AL">Alabama</option>
-                                <option value="AK">Alaska</option>
+                            <label for="select-period">Study period:</label>
+                            <select id="select-period" class="js-study-period-select" placeholder="Select study program...">
+                                <option value="Engineering">Engineering</option>
+                                <option value="Economics">Economics</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="select-program">Study program:</label>
+                            <select id="select-program" class="js-study-period-select" placeholder="Select study program...">
+                                <option value="Engineering">Engineering</option>
+                                <option value="Economics">Economics</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="select-course">Course:</label>
+                            <select id="select-course" class="js-study-period-select" placeholder="Select study program...">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="select-group">Group:</label>
+                            <select id="select-group" class="js-study-period-select" placeholder="Select study program...">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
                             </select>
                         </div>
                     </div>

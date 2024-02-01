@@ -20,6 +20,8 @@ class PopupSelectSchedule extends Popup {
         this.tabErasmusEl.classList.remove('active');
         this.inputFullTimeEl.classList.remove('d-none');
         this.inputErasmusEl.classList.add('d-none');
+
+        
     }
 
     onTabErasmusSelected() {
