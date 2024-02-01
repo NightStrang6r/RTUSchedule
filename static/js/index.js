@@ -239,35 +239,6 @@
   };
   var darkTheme_default = DarkTheme;
 
-  // static/js/dev/API.js
-  var API = class {
-    async getSemesterProgEventList(semesterProgramId, year, month) {
-      const url = `/getSemesterProgEventList`;
-      const body = {
-        semesterProgramId,
-        year,
-        month
-      };
-      const data = new URLSearchParams(body);
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-        },
-        body: data
-      };
-      let res, json;
-      try {
-        res = await fetch(url, options);
-        json = await res.json();
-      } catch (err) {
-        json = false;
-      }
-      return json;
-    }
-  };
-  var API_default = API;
-
   // static/js/dev/popup.js
   var Popup = class {
     constructor(popupSelector, triggerSelector) {
@@ -311,7 +282,19 @@
       this.inputErasmusEl = document.querySelector(".js-popup-schedule-input-erasmus");
       this.tabFullTimeEl.addEventListener("click", (event) => this.onTabFullTimeSelected(event));
       this.tabErasmusEl.addEventListener("click", (event) => this.onTabErasmusSelected(event));
-      var $select = $(".js-study-period-select").selectize();
+      this.initSemesters();
+    }
+    async initSemesters() {
+      const semesters = await window.storage.getSemesters();
+      this.$selectPeriod = $("#select-period").selectize();
+      this.controlPeriod = this.$selectPeriod[0].selectize;
+      semesters.forEach((semester) => {
+        this.controlPeriod.addOption({
+          id: semester.semesterId,
+          title: semester.titleEN,
+          url: "/"
+        });
+      });
     }
     onTabFullTimeSelected() {
       this.tabFullTimeEl.classList.add("active");
@@ -328,21 +311,92 @@
   };
   var popupSelectSchedule_default = PopupSelectSchedule;
 
+  // static/js/dev/API.js
+  var API = class {
+    async POSTRequest(url, body = null) {
+      if (body) {
+        body = new URLSearchParams(body);
+      }
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+        },
+        body
+      };
+      const res = await fetch(url, options);
+      return res;
+    }
+    async getJsonFromRes(res) {
+      return await res.json();
+    }
+    async getSemesters() {
+      const url = `/getSemesters`;
+      const res = await this.POSTRequest(url);
+      const json = await this.getJsonFromRes(res);
+      return json;
+    }
+    async getSemesterProgEventList(semesterProgramId, year, month) {
+      const url = `/getSemesterProgEventList`;
+      const body = {
+        semesterProgramId,
+        year,
+        month
+      };
+      const res = await this.POSTRequest(url, body);
+      const json = await this.getJsonFromRes(res);
+      return json;
+    }
+    async getChousenSemesterById(semesterId) {
+      const url = `/getChousenSemesterById`;
+      const body = {
+        semesterId
+      };
+      const res = await this.POSTRequest(url, body);
+      const json = await this.getJsonFromRes(res);
+      return json;
+    }
+    async findProgramsBySemesterId(semesterId) {
+      const url = `/findProgramsBySemesterId`;
+      const body = {
+        semesterId
+      };
+      const res = await this.POSTRequest(url, body);
+      const json = await this.getJsonFromRes(res);
+      return json;
+    }
+  };
+  var API_default = API;
+
+  // static/js/dev/storage.js
+  var Storage = class {
+    constructor() {
+      this.API = new API_default();
+    }
+    async getSemesters() {
+      return await this.API.getSemesters();
+    }
+    async getSemesterProgEventList(semesterProgramId, year, month) {
+      return await this.API.getSemesterProgEventList(semesterProgramId, year, month);
+    }
+  };
+  var storage_default = Storage;
+
   // static/js/dev/app.js
   var App = class {
     constructor() {
       document.addEventListener("DOMContentLoaded", (event) => this.main(event));
+      window.storage = new storage_default();
       this.burger = new burger_default();
       this.darkTheme = new darkTheme_default();
       this.calendar = new calendar_default("#calendar");
-      this.API = new API_default();
     }
     run() {
       this.burger.init();
     }
     async main() {
       this.popupSelectSchedule = new popupSelectSchedule_default(".cd-popup-select-schedule", ".js-course-select");
-      const eventList = await this.API.getSemesterProgEventList("13017", "2024", "02");
+      const eventList = await window.storage.getSemesterProgEventList("13017", "2024", "02");
       this.calendar.loadEvents(eventList);
       console.log("Events loaded: ", eventList);
       this.calendar.render();

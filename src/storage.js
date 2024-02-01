@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import API from './API.js';
 
 const fsa = fs.promises;
 
@@ -13,6 +14,23 @@ class Storage {
         this.indexesPath = `${this.staticPath}/indexes`;
 
         this.config = this.getConfig();
+        this.updateSemesters();
+    }
+
+    async updateSemesters(){
+        this.api = new API();
+        const startFromSemesterId = 20;
+        const endSemesterId = 100;
+        this.semesters = [];
+        for(let i=startFromSemesterId; i<endSemesterId; i++){
+            const semester = await this.api.getChousenSemesterById(i);
+            if(!semester){
+                this.semesters = this.semesters.slice(-4);
+                //console.log(this.semesters);
+                return;
+            }
+            this.semesters.push(semester);
+        }
     }
 
     getPath(staticPath) {

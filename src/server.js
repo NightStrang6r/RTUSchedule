@@ -16,6 +16,10 @@ class Server {
 
         this.server.get('/',             (req, res) => router.onIndex(req, res));
         this.server.get('/index.html',   (req, res) => router.onIndex(req, res));
+        
+        //custom
+        this.server.post('/getSemesters', (req, res) => router.getSemesters(req, res));
+        //custom
         this.server.post('/getSemesterProgEventList', (req, res) => router.getSemesterProgEventList(req, res));
         this.server.post('/getChousenSemesterById', (req, res) => router.getChousenSemesterById(req, res));
         this.server.post('/findProgramsBySemesterId', (req, res) => router.findProgramsBySemesterId(req, res));
@@ -31,3 +35,4 @@ class Server {
 }
 
 export default Server;
+

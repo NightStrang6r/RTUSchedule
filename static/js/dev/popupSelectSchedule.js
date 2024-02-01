@@ -11,8 +11,26 @@ class PopupSelectSchedule extends Popup {
 
         this.tabFullTimeEl.addEventListener('click', (event) => this.onTabFullTimeSelected(event));
         this.tabErasmusEl.addEventListener('click', (event) => this.onTabErasmusSelected(event));
+         
+        
+        
+        this.initSemesters();
+    }
+    
+    async initSemesters(){
+        const semesters = await window.storage.getSemesters();
+        this.$selectPeriod = $('#select-period').selectize();
+        
+        this.controlPeriod = this.$selectPeriod[0].selectize;
 
-        var $select = $('.js-study-period-select').selectize();          
+        semesters.forEach(semester => {
+            this.controlPeriod.addOption({
+                id: semester.semesterId,
+                title: semester.titleEN,
+                url: '/'
+            });
+        });
+        // console.log(semesters);
     }
 
     onTabFullTimeSelected() {
@@ -21,7 +39,6 @@ class PopupSelectSchedule extends Popup {
         this.inputFullTimeEl.classList.remove('d-none');
         this.inputErasmusEl.classList.add('d-none');
 
-        
     }
 
     onTabErasmusSelected() {

@@ -26,13 +26,22 @@ class Router {
         return express.static(global.storage.staticPath);
     }
 
+    async getSemesters(req, res){
+        try{
+            res.status(200).send(global.storage.semesters);
+        }
+        catch (e) {
+            global.log(`Error while getSemesters: ${e}`, 'r');
+        }
+    }
+
     async getSemesterProgEventList(req, res) {
         try {
             if (!req.body || !req.body.semesterProgramId || !req.body.year || !req.body.month) {
                 res.status(400).send('Bad request');
                 return;
             }
-    
+            
             const eventList = await this.API.getSemesterProgEventList(req.body.semesterProgramId, req.body.year, req.body.month);
 
             if(!eventList) {
@@ -54,14 +63,14 @@ class Router {
                 return;
             }
     
-            const semeserInfo = await this.API.getChousenSemesterById(req.body.semesterId);
+            const semesterInfo = await this.API.getChousenSemesterById(req.body.semesterId);
 
-            if(!semeserInfo) {
+            if(!semesterInfo) {
                 res.status(500).send('Internal server error');
                 return;
             }
 
-            res.status(200).send(semeserInfo);
+            res.status(200).send(semesterInfo);
         } catch (e) {
             global.log(`Error while getChousenSemesterById: ${e}`, 'r');
             return null;

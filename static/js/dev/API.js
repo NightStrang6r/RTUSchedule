@@ -21,6 +21,17 @@ class API {
         return (await res.json());
     }
 
+    async getSemesters() {
+        const url = `/getSemesters`;
+
+        // const body = {
+        // };
+        // const res = await this.POSTRequest(url, body);
+        const res = await this.POSTRequest(url);
+        const json = await this.getJsonFromRes(res);
+        return json;
+    }
+
     async getSemesterProgEventList(semesterProgramId, year, month) {
         const url = `/getSemesterProgEventList`;
 
